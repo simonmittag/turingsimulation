@@ -2,7 +2,7 @@
 
 ## Overview
 
-This project is a simple implementation of a **Turing Machine** written in Go. 
+This project is a [simple implementation](https://docs.google.com/presentation/d/1kqVvuND_x86zQncIrshWVPbwkekzEGP2Xe92l65_3KQ) of a **Turing Machine** written in Go. 
 A Turing Machine is a theoretical computing device that operates on an infinite 
 tape divided into cells. Each cell can hold a symbol, and the machine's "head" can 
 perform operations (e.g., read, write, move left or right) based on a predefined 
