@@ -4,12 +4,8 @@ import (
 	"fmt"
 )
 
-// Symbol is a character on the tape
-
-// TuringMachine represents the state of the machine
-
 func main() {
-	// Tape layout: A, B, _, _, SUM, CARRY
+	//we initialise the tape
 	tape := []Symbol{One, One, Blank, Blank} // A = 1, B = 1
 
 	transitions := map[Key]Transition{
