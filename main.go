@@ -4,10 +4,37 @@ import (
 	"fmt"
 )
 
+// main is the entry point of the application that initializes the Turing machine,
+// loads its program, runs it, and outputs the final tape state.
 func main() {
 	//we initialise the tape
-	tape := []Symbol{One, One, Blank, Blank} // A = 1, B = 1
+	tape := initialiseTape() // A = 1, B = 1
 
+	//we load our program
+	program := getProgram()
+
+	//the machine is initialised with a tape, a starter position for the head, an initial state, and the actual program
+	tm := &TuringMachine{
+		Tape:    tape,
+		Head:    0,
+		Program: program,
+		State:   "q0",
+	}
+
+	//run the machine
+	tm.Run()
+
+	//after the machine stops, print the contents of the tape
+	fmt.Printf("Final Tape: %v\n", string(tm.Tape))
+}
+
+// initialiseTape initializes the Turing machine tape with predefined symbols: two '1's followed by two blanks.
+func initialiseTape() []Symbol {
+	return []Symbol{One, One, Blank, Blank}
+}
+
+// loads the program
+func getProgram() map[Key]Transition {
 	transitions := map[Key]Transition{
 		// Read A
 		{"q0", Zero}: {Zero, Right, "qStoreA0"},
@@ -37,14 +64,5 @@ func main() {
 		{"qXOR3", Blank}: {Zero, Right, "qAND3"},
 		{"qAND3", Blank}: {One, Right, "HALT"},
 	}
-
-	tm := &TuringMachine{
-		Tape:    tape,
-		Head:    0,
-		State:   "q0",
-		Program: transitions,
-	}
-	tm.Run()
-
-	fmt.Printf("Final Tape: %v\n", string(tm.Tape))
+	return transitions
 }

@@ -39,8 +39,8 @@ type Key struct {
 type TuringMachine struct {
 	Tape    []Symbol
 	Head    int
-	State   string
 	Program map[Key]Transition
+	State   string
 }
 
 // PerformSingleStep executes a single transition in the Turing Machine based on the current state and tape value.
