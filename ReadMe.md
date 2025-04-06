@@ -11,8 +11,6 @@ set of rules (or "transitions") that form a program.
 The implemented Turing Machine in this project performs basic bitwise operations 
 (e.g., XOR logic) on predefined 1-Bit inputs.
 
----
-
 ## How It Works
 
 The Turing Machine consists of the following components:
@@ -30,8 +28,6 @@ The Turing Machine consists of the following components:
 
 The machine begins with an initial state, reads the tape symbol at the head's position, and applies the appropriate transition. It continues operating until a state is reached where no valid transition exists (this halts the machine).
 
----
-
 ## What the Program Does
 
 In this implementation:
@@ -40,8 +36,6 @@ In this implementation:
     - XOR determines the `SUM` of A and B.
     - AND determines the `CARRY` when both A and B are `1`.
 3. The result is written to the tape, and the machine stops.
-
----
 
 ## How to Run
 
@@ -65,10 +59,6 @@ Starting Program. Machine State: q0 | Head Position: 1 | Full Tape: 11__
    Final Tape: 11_01
 ```
 
----
-
-
-
 ## Customizing the Turing Machine
 
 ### Changing the Input Tape
@@ -86,8 +76,6 @@ Example transition:
 ```textmate
 {"q0", Zero}: {Zero, Right, "qStoreA0"}, // Define rule for state `q0` reading `0`
 ```
-
----
 
 ## License
 
