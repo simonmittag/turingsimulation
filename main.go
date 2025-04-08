@@ -15,14 +15,18 @@ func main() {
 
 	//the machine is initialised with a tape, a starter position for the head, an initial state, and the actual program
 	tm := &TuringMachine{
-		Tape:    tape,
-		Head:    0,
-		Program: program,
-		State:   "q0",
+		Tape:         tape,
+		Head:         0,
+		Program:      program,
+		State:        "q0",
+		ClockCycleµs: 50,
 	}
 
 	//run the machine
 	tm.Run()
+
+	//print the stats
+	tm.Stats()
 
 	//after the machine stops, print the contents of the tape
 	fmt.Printf("Final Tape: %v\n", string(tm.Tape))
@@ -30,7 +34,7 @@ func main() {
 
 // initialiseTape initializes the Turing machine tape with predefined symbols: two '1's followed by two blanks.
 func initialiseTape() []Symbol {
-	return []Symbol{One, One, Blank, Blank}
+	return []Symbol{Zero, Zero, Blank, Blank}
 }
 
 // loads the program

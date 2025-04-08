@@ -40,10 +40,19 @@ type Key struct {
 
 // TuringMachine represents a Turing Machine model with a tape, head position, state, and program transitions.
 type TuringMachine struct {
-	Tape    []Symbol
-	Head    int
-	Program map[Key]Transition
-	State   string
+	Tape         []Symbol
+	Head         int
+	Program      map[Key]Transition
+	State        string
+	ClockCycleµs int
+}
+
+func (tm *TuringMachine) Stats() {
+	fmt.Printf("\nTuring Machine: TA-1")
+	fmt.Printf("\nHDD: %dBit", len(tm.Tape))
+	fmt.Printf("\nRAM: %dByte", len(tm.State))
+	fmt.Printf("\nROM: %dByte\n", len(tm.Program))
+	fmt.Printf("\nClockSpeed: %dHz", 1000000/tm.ClockCycleµs)
 }
 
 // PerformSingleStep executes a single transition in the Turing Machine based on the current state and tape value.
@@ -62,7 +71,7 @@ func (tm *TuringMachine) PerformSingleStep() bool {
 	tm.WriteToTape(trans)
 	tm.MoveTheHead(trans)
 	tm.State = trans.State
-	fmt.Printf("Step performed. Machine State: %s | Head Position: %d | Full Tape: %v\n", tm.State, tm.Head+1, string(tm.Tape))
+	fmt.Printf("Step performed. Machine State: %s | Head Position: %d | Full Tape: %v\n", tm.State, tm.Head+1, string(tm.Tape)+"\n")
 	return true
 }
 
@@ -107,6 +116,6 @@ func (tm *TuringMachine) ReadFromTape() Symbol {
 func (tm *TuringMachine) Run() {
 	fmt.Printf("Starting Program. Machine State: %s | Head Position: %d | Full Tape: %v\n", tm.State, tm.Head+1, string(tm.Tape))
 	for tm.PerformSingleStep() {
-		time.Sleep(500 * time.Millisecond)
+		time.Sleep(time.Duration(tm.ClockCycleµs) * time.Microsecond)
 	}
 }
